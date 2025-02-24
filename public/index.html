@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h1>Panel de Administración-------------------</h1>
+    <h1>Panel de Administración-----------dasd--------</h1>
     <form id="adminForm">
         <label for="title">Título:</label>
         <input type="text" id="title" name="title" required>
@@ -28,7 +28,7 @@
     
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-    fetch("https://panel-express-github-io.vercel.app/")  // Cambia localhost a la URL de tu aplicación en Render
+    fetch("https://panelexpress-github-io-1.onrender.com")  // Cambia localhost a la URL de tu aplicación en Render
         .then(response => response.json())
         .then(data => {
             document.getElementById("title").value = data.title || "";
@@ -44,7 +44,7 @@ document.getElementById("adminForm").addEventListener("submit", (e) => {
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
     
-    fetch("https://panel-express-github-io.vercel.app/", {  // Cambia localhost a la URL de tu aplicación en Render
+    fetch("https://panelexpress-github-io-1.onrender.com", {  // Cambia localhost a la URL de tu aplicación en Render
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description })
