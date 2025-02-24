@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label, input, textarea { display: block; margin-bottom: 10px; width: 100%; }
+        button { padding: 10px; background: blue; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Panel de Administración</h1>
+    <form id="adminForm">
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" required></textarea>
+        
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    
+    <h2>Vista Previa</h2>
+    <h3 id="previewTitle"></h3>
+    <p id="previewDescription"></p>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+    fetch("https://tuproject.onrender.com/content")  // Cambia localhost a la URL de tu aplicación en Render
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("title").value = data.title || "";
+            document.getElementById("description").value = data.description || "";
+            document.getElementById("previewTitle").innerText = data.title || "";
+            document.getElementById("previewDescription").innerText = data.description || "";
+        });
+});
+
+document.getElementById("adminForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    
+    fetch("https://tuproject.onrender.com/content", {  // Cambia localhost a la URL de tu aplicación en Render
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description })
+    })
+    .then(response => response.json())
+    .then(() => {
+        document.getElementById("previewTitle").innerText = title;
+        document.getElementById("previewDescription").innerText = description;
+        alert("Contenido actualizado correctamente");
+    })
+    .catch(error => console.error("Error al actualizar contenido:", error));
+});
+
+    </script>
+</body>
+</html>
